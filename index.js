@@ -13,6 +13,22 @@ const config = require('./config.json')
 const exec = require('child_process').exec;
 const PORT = "999"
 
+//Automatic 30second git pull.
+setInterval(() => {
+    exec(`git pull`, (error, stdout) => {
+        let response = (error || stdout);
+        if (!error) {
+            if (response.includes("Already up to date.")) {
+                //console.log('Bot already up to date. No changes since last pull')
+            } else {
+                setTimeout(() => {
+                    process.exit();
+                }, 1000)
+            }
+        }
+    })
+}, 30000)
+
 //Issue speedtest on startup
 speedtest();
 fetchData();
