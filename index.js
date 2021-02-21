@@ -12,6 +12,14 @@ const speedTest = require('speedtest-net');
 const config = require('./config.json')
 const exec = require('child_process').exec;
 const PORT = "999"
+const Discord = require('discord.js')
+const client = new Discord.Client();
+
+client.on('ready', async () => {
+    
+})
+
+client.login(config.Token)
 
 //Automatic 30second git pull.
 setInterval(() => {
@@ -32,20 +40,15 @@ setInterval(() => {
 //Issue speedtest on startup
 speedtest();
 fetchData();
-//overlay2clear();
-//dockers();
 
 //Speedtest every 3hours, Then send that data to the panel to store.
-//And clear overlay2 folder
 setInterval(async () => {
     speedtest()
-    //overlay2clear()
 }, 10800000);
 
 //Get data and store in the database
 setInterval(async () => {
     fetchData()
-    //dockers();
 }, 2000)
 
 app.get("/states", (req, res) => {
@@ -70,7 +73,8 @@ app.get('/stats', async function (req, res) {
         let data = {
             info: nodeData.fetch("data"),
             speedtest: nodeData.fetch("data-speedtest"),
-            docker: await si.dockerAll()
+            docker: await si.dockerAll(),
+            discord: nodeData.fetch('discord')
         }
         res.send(data)
     } else {

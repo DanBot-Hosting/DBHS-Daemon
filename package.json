@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "latest",
+    "discord.js": "^12.5.1",
     "express": "^4.17.1",
     "http": "0.0.1-security",
     "moment": "^2.29.1",
@@ -20,6 +21,6 @@
     "quick.db": "^7.1.3",
     "socket.io": "latest",
     "speedtest-net": "latest",
-    "systeminformation": "latest"
+    "systeminformation": "^4.30.6"
   }
 }
