@@ -12,14 +12,7 @@ const speedTest = require('speedtest-net');
 const config = require('./config.json')
 const exec = require('child_process').exec;
 const PORT = "999"
-const Discord = require('discord.js')
-const client = new Discord.Client();
 
-client.on('ready', async () => {
-    
-})
-
-client.login(config.Token)
 
 //Automatic 30second git pull.
 setInterval(() => {
@@ -40,6 +33,7 @@ setInterval(() => {
 //Issue speedtest on startup
 speedtest();
 fetchData();
+dockers();
 
 //Speedtest every 3hours, Then send that data to the panel to store.
 setInterval(async () => {
@@ -50,6 +44,10 @@ setInterval(async () => {
 setInterval(async () => {
     fetchData()
 }, 2000)
+
+setInterval(async () => {
+    dockers();
+}, 60000)
 
 app.get("/states", (req, res) => {
     if (req.headers.password === config.password) {
