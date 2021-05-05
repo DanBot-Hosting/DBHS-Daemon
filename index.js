@@ -9,6 +9,7 @@ const os = require("os");
 const pretty = require('prettysize');
 const moment = require("moment");
 const speedTest = require('speedtest-net');
+const fs = require('fs');
 const config = require('./config.json')
 const exec = require('child_process').exec;
 const PORT = "999"
@@ -51,12 +52,9 @@ setInterval(async () => {
 
 app.get("/states", (req, res) => {
     if (req.headers.password === config.password) {
-        exec(`cat /var/lib/pterodactyl/states.json`, (error, stdout) => {
-
-            let response = (error || stdout);
-
-            res.json(response)
-        })
+        fs.readFile('/var/lib/pterodactyl/states.json', { encoding: "utf-8" }, (err, data) => {
+            res.json(Object.entries(JSON.parse(data).filter(x => x.toLowerCase() == 'offline')))
+        });
     } else {
         res.send('Invalid or no password provided.')
     }
@@ -84,7 +82,7 @@ app.get('/wings', function (req, res) {
     if (req.headers.password === config.password) {
         console.log(req.query)
         if (!req.query.action) {
-            res.json({ status: "You forgot to send start/restart/stop in the request"})
+            res.json({ status: "You forgot to send start/restart/stop in the request" })
         } else if (req.query.action === "start") {
             res.json({ status: "Wings started" })
             exec(`service wings start`)
@@ -120,8 +118,8 @@ async function fetchData() {
 
     //OS UPTIME
     let uptime = os.uptime();
-    let d = Math.floor(uptime / (3600*24));
-    let h = Math.floor(uptime % (3600*24) / 3600);
+    let d = Math.floor(uptime / (3600 * 24));
+    let h = Math.floor(uptime % (3600 * 24) / 3600);
     let m = Math.floor(uptime % 3600 / 60);
     let s = Math.floor(uptime % 60);
     let dDisplay = d > 0 ? d + (d === 1 ? " day, " : " days, ") : "";
@@ -168,7 +166,7 @@ async function fetchData() {
 
 async function speedtest() {
     var timestamp = `${moment().format("YYYY-MM-DD HH:mm:ss")}`;
-    const speed = await speedTest({maxTime: 5000, server: 15423, acceptLicense: true, acceptGdpr: true})
+    const speed = await speedTest({ maxTime: 5000, server: 15423, acceptLicense: true, acceptGdpr: true })
     speed.on('data', async (data) => {
         nodeData.set('data-speedtest', {
             speedname: os.hostname(),
