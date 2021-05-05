@@ -67,7 +67,7 @@ app.get("/states", (req, res) => {
 
 app.get("/empty", (req, res) => {
     if (req.headers.password === config.password) {
-        res.send(checkEmpty());
+        res.send(checkEmpty.run());
     } else {
         res.send('Invalid or no password provided.')
     }
