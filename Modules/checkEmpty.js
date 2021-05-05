@@ -1,7 +1,7 @@
 let run = () => {
     const fs = require('fs');
 
-    let VOLUMESDIR = "/srv/daemon-data/";
+    let VOLUMESDIR = "/var/lib/pterodactyl/volumes/";
     let STATESFILE = "/var/lib/pterodactyl/states.json";
 
 
