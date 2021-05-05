@@ -26,9 +26,7 @@ setInterval(() => {
             if (response.includes("Already up to date.")) {
                 //console.log('Bot already up to date. No changes since last pull')
             } else {
-                setTimeout(() => {
-                    process.exit();
-                }, 1000)
+                exec("service dbh restart");
             }
         }
     })
