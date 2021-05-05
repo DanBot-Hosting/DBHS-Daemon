@@ -53,7 +53,11 @@ setInterval(async () => {
 app.get("/states", (req, res) => {
     if (req.headers.password === config.password) {
         fs.readFile('/var/lib/pterodactyl/states.json', { encoding: "utf-8" }, (err, data) => {
-            res.json(Object.entries(JSON.parse(data).filter(x => x.toLowerCase() == 'offline')))
+
+            let servers = Object.entries(JSON.parse(data).filter(x => x.toLowerCase() == 'offline'));
+
+            console.log(servers);
+            res.json(servers)
         });
     } else {
         res.send('Invalid or no password provided.')
