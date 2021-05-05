@@ -15,6 +15,9 @@ const exec = require('child_process').exec;
 const PORT = "999"
 
 
+//Modules
+const checkEmpty = require('./Modules/checkEmpty');
+
 //Automatic 30second git pull.
 setInterval(() => {
     exec(`git pull`, (error, stdout) => {
@@ -57,6 +60,14 @@ app.get("/states", (req, res) => {
 
             res.json(servers)
         });
+    } else {
+        res.send('Invalid or no password provided.')
+    }
+})
+
+app.get("/empty", (req, res) => {
+    if (req.headers.password === config.password) {
+        res.send(checkEmpty());
     } else {
         res.send('Invalid or no password provided.')
     }
