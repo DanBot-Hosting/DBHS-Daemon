@@ -53,11 +53,8 @@ setInterval(async () => {
 app.get("/states", (req, res) => {
     if (req.headers.password === config.password) {
         fs.readFile('/var/lib/pterodactyl/states.json', { encoding: "utf-8" }, (err, data) => {
-            console.log(data);
-
             let servers = Object.entries(JSON.parse(data)).filter(x => x[1].toLowerCase() == 'offline').map(x => x[0]);
 
-            console.log(servers);
             res.json(servers)
         });
     } else {
