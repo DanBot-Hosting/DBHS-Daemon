@@ -37,10 +37,12 @@ speedtest();
 fetchData();
 dockers();
 
+/*
 //Speedtest every 3hours, Then send that data to the panel to store.
 setInterval(async () => {
     speedtest()
 }, 10800000);
+*/
 
 //Get data and store in the database
 setInterval(async () => {
@@ -78,10 +80,10 @@ app.get("/", (req, res) => {
 app.get('/stats', async function (req, res) {
     if (req.headers.password === config.password) {
         let data = {
-            info: nodeData.fetch("data"),
-            speedtest: nodeData.fetch("data-speedtest"),
-            docker: await si.dockerAll(),
-            discord: nodeData.fetch('discord')
+            info: nodeData.fetch("data")//,
+            //speedtest: nodeData.fetch("data-speedtest"),
+            //docker: await si.dockerAll(),
+            //discord: nodeData.fetch('discord')
         }
         res.send(data)
     } else {
