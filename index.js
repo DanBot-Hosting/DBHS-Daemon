@@ -26,7 +26,7 @@ setInterval(() => {
             if (response.includes("Already up to date.")) {
                 //console.log('Bot already up to date. No changes since last pull')
             } else {
-                exec("service dbh restart");
+                exec("service danbot restart");
             }
         }
     })
@@ -154,10 +154,10 @@ async function fetchData() {
         swaptotal: pretty(memdata.swaptotal),
         swapusedraw: memdata.swapused,
         swaptotalraw: memdata.swaptotal,
-        diskused: pretty(diskdata[0].used),
-        disktotal: pretty(diskdata[0].size),
-        diskusedraw: diskdata[0].used,
-        disktotalraw: diskdata[0].size,
+        diskused: pretty(diskdata[1].used),
+        disktotal: pretty(diskdata[1].size),
+        diskusedraw: diskdata[1].used,
+        disktotalraw: diskdata[1].size,
         netrx: pretty(netdata[0].rx_bytes),
         nettx: pretty(netdata[0].tx_bytes),
         osplatform: osdata.platform,
