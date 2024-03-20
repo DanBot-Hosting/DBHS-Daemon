@@ -1,24 +1,25 @@
 {
-  "name": "servermonitor-fetch",
-  "version": "1.0.1",
-  "description": "A program that runs in system background to fetch data for the main ServerMonitor program.",
+  "name": "dbh-daemon",
+  "version": "2.0.0",
+  "description": "A script that allows DBH bot to check for abuse, and generally monitor overall health of our servers!",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "danielpmc",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanBot-Hosting/DBHS-Daemon.git"
+  },
+  "author": "DanBot Hosting LTD",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DanBot-Hosting/DBHS-Daemon/issues"
+  },
+  "homepage": "https://github.com/DanBot-Hosting/DBHS-Daemon#readme",
   "dependencies": {
-    "body-parser": "latest",
-    "discord.js": "^12.5.1",
-    "express": "^4.17.1",
-    "http": "0.0.1-security",
-    "moment": "^2.29.1",
-    "os": "^0.1.1",
-    "pretty": "^2.0.0",
+    "mongoose": "^8.2.2",
     "prettysize": "^2.0.0",
-    "quick.db": "latest",
-    "systeminformation": "^4.30.6",
-    "promise-mysql": "latest",
+    "quick.db": "^9.1.7",
+    "systeminformation": "^5.22.6"
   }
 }

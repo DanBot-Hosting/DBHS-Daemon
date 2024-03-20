@@ -1,12 +1,3 @@
 {
-  "password": "",
-
-  "WebServer": 999,
-
-  "MySQL": {
-    "Host": "",
-    "User": "",
-    "Pass": "",
-    "DB": ""
-  }
+  "MongoDB": "URL"
 }
